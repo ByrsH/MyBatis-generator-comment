@@ -3,6 +3,7 @@ package com.byrsh.mybatisgeneratorcomment.generator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
+import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.internal.DefaultCommentGenerator;
 import org.mybatis.generator.internal.util.StringUtility;
@@ -11,7 +12,7 @@ import java.util.Properties;
 
 /**
  * @Author: yangrusheng
- * @Description:
+ * @Description: 自定义生成注释类
  * @Date: Created in 16:13 2018/9/26
  * @Modified By:
  */
@@ -47,8 +48,21 @@ public class CustomCommentGenerator extends DefaultCommentGenerator {
 
     @Override
     public void addComment(XmlElement xmlElement) {
+        //判断是否抑制所有注释
+        if (!this.suppressAllComments) {
+            //判断是否抑制默认的注释
+            if (!this.suppressDefaultComments) {
+                super.addComment(xmlElement);
+            }
+            //判断是否抑制自定义注释
+            if (!this.suppressCustomComments) {
+                addMapperXmlComment(xmlElement);
 
+            }
+        }
     }
+
+
 
     @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable,
@@ -68,6 +82,16 @@ public class CustomCommentGenerator extends DefaultCommentGenerator {
                 }
             }
         }
+    }
+
+
+
+    private void addMapperXmlComment(XmlElement xmlElement) {
+        xmlElement.addElement(new TextElement("<!--"));
+
+        if (xmlElement.getName().equals(""))
+
+        xmlElement.addElement(new TextElement("-->"));
     }
 
 }

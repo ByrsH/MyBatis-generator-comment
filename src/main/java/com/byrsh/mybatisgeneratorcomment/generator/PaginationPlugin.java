@@ -28,6 +28,10 @@ public class PaginationPlugin extends PluginAdapter {
         PrimitiveTypeWrapper integerWrapper = FullyQualifiedJavaType.getIntInstance().getPrimitiveTypeWrapper();
 
         Field limit = new Field();
+        //添加注释
+        limit.addJavaDocLine("/**");
+        limit.addJavaDocLine(" * 分页查询，每页记录数量");
+        limit.addJavaDocLine(" */");
         limit.setName("limit");
         limit.setVisibility(JavaVisibility.PRIVATE);
         limit.setType(integerWrapper);
@@ -48,6 +52,10 @@ public class PaginationPlugin extends PluginAdapter {
         topLevelClass.addMethod(getLimit);
 
         Field offset = new Field();
+        //添加注释
+        offset.addJavaDocLine("/**");
+        offset.addJavaDocLine(" * 分页查询，页数");
+        offset.addJavaDocLine(" */");
         offset.setName("offset");
         offset.setVisibility(JavaVisibility.PRIVATE);
         offset.setType(integerWrapper);

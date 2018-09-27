@@ -10,8 +10,14 @@ public class UserExample {
 
     protected List<Criteria> oredCriteria;
 
+    /**
+     * 分页查询，每页记录数量
+     */
     private Integer limit;
 
+    /**
+     * 分页查询，页数
+     */
     private Integer offset;
 
     /**

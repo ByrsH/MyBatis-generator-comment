@@ -9,6 +9,10 @@
 
     <context id="context" targetRuntime="MyBatis3">
         <property name="javaFileEncoding" value="utf-8" />
+
+        <plugin type="com.byrsh.mybatisgeneratorcomment.generator.DeleteByIdLogicPlugin"></plugin>
+        <plugin type="com.byrsh.mybatisgeneratorcomment.generator.PaginationPlugin"></plugin>
+
         <!--自定义生成注释类CommentGenerator-->
         <commentGenerator type="com.byrsh.mybatisgeneratorcomment.generator.CustomCommentGenerator">
             <!-- This property is used to specify whether MBG will include any coments in the generated code -->

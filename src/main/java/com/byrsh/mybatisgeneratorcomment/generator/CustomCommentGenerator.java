@@ -49,6 +49,10 @@ public class CustomCommentGenerator extends DefaultCommentGenerator {
         super.addConfigurationProperties(properties);
     }
 
+    /**
+     * xml文件注释
+     * @param xmlElement
+     */
     @Override
     public void addComment(XmlElement xmlElement) {
         //判断是否抑制所有注释
@@ -64,6 +68,11 @@ public class CustomCommentGenerator extends DefaultCommentGenerator {
         }
     }
 
+    /**
+     * 方法加注释
+     * @param method
+     * @param introspectedTable
+     */
     @Override
     public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
         //判断是否抑制所有注释
@@ -75,13 +84,16 @@ public class CustomCommentGenerator extends DefaultCommentGenerator {
             //判断是否抑制自定义注释
             if (!this.suppressCustomComments) {
                 addCustomMethodComment(method);
-
             }
         }
     }
 
-
-
+    /**
+     * 字段加注释
+     * @param field
+     * @param introspectedTable
+     * @param introspectedColumn
+     */
     @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable,
                                 IntrospectedColumn introspectedColumn) {
@@ -119,7 +131,8 @@ public class CustomCommentGenerator extends DefaultCommentGenerator {
         } else if (value.equals("Base_Column_List")) {
             xmlElement.addElement(new TextElement(value + "，基本的数据库表字段"));
         } else if (value.equals("selectByExample")) {
-            xmlElement.addElement(new TextElement(value + "，根据example查询"));
+            xmlElement.addElement(new TextElement(value + "，根据example查询，如果example中含有成员变量"
+                    + "limit、offset并且不为null，则分页查询"));
         } else if (value.equals("selectByPrimaryKey")) {
             xmlElement.addElement(new TextElement(value + "，根据数据库ID查询"));
         } else if (value.equals("deleteByPrimaryKey")) {
@@ -142,6 +155,8 @@ public class CustomCommentGenerator extends DefaultCommentGenerator {
             xmlElement.addElement(new TextElement(value + "，根据数据库ID选择性更新"));
         } else if (value.equals("updateByPrimaryKey")) {
             xmlElement.addElement(new TextElement(value + "，根据数据库ID更新"));
+        } else if (value.equals("deleteByIdLogic")) {
+            xmlElement.addElement(new TextElement(value + "，根据数据库ID删除，逻辑删除"));
         }
         xmlElement.addElement(new TextElement("-->"));
     }
@@ -150,7 +165,8 @@ public class CustomCommentGenerator extends DefaultCommentGenerator {
         method.addJavaDocLine("/**");
         String methodName = method.getName();
         if (methodName.equals("selectByExample")) {
-            method.addJavaDocLine(" * 根据example查询");
+            method.addJavaDocLine(" * 根据example查询，如果example中含有成员变量limit、offset且不为null，"
+                    + "则分页查询");
         } else if (methodName.equals("selectByPrimaryKey")) {
             method.addJavaDocLine(" * 根据数据库ID查询");
         } else if (methodName.equals("deleteByPrimaryKey")) {
@@ -173,6 +189,8 @@ public class CustomCommentGenerator extends DefaultCommentGenerator {
             method.addJavaDocLine(" * 根据数据库ID选择性更新");
         } else if (methodName.equals("updateByPrimaryKey")) {
             method.addJavaDocLine(" * 根据数据库ID更新");
+        } else if (methodName.equals("deleteByIdLogic")) {
+            method.addJavaDocLine(" * 根据数据库ID删除，逻辑删除");
         }
 
         method.addJavaDocLine(" */");

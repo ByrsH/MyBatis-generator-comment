@@ -82,7 +82,7 @@
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.byrsh.mybatisgeneratorcomment.model.UserExample" >
     <!--
-    selectByExample，根据example查询
+    selectByExample，根据example查询，如果example中含有成员变量limit、offset并且不为null，则分页查询
     -->
     select
     <if test="distinct" >
@@ -95,6 +95,14 @@
     </if>
     <if test="orderByClause != null" >
       order by ${orderByClause}
+    </if>
+    <if test="limit != null" >
+      <if test="offset != null" >
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null" >
+        limit ${limit}
+      </if>
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -237,5 +245,8 @@
       phone = #{phone,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="deleteByIdLogic" >
+    update user set `delete`=#{delete,jdbcType=INTEGER} where id=#{id,jdbcType=BIGINT}
   </update>
 </mapper>

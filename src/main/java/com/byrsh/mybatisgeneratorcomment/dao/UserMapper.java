@@ -32,7 +32,7 @@ public interface UserMapper {
     int insertSelective(User record);
 
     /**
-     * 根据example查询
+     * 根据example查询，如果example中含有成员变量limit、offset且不为null，则分页查询
      */
     List<User> selectByExample(UserExample example);
 
@@ -60,4 +60,8 @@ public interface UserMapper {
      * 根据数据库ID更新
      */
     int updateByPrimaryKey(User record);
+
+    /**
+     */
+    int deleteLogicById(@Param("delete") int delete, @Param("id") Long id);
 }

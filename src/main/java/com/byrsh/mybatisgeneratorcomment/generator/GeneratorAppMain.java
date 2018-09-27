@@ -27,8 +27,7 @@ public class GeneratorAppMain {
             List<String> warnings = new ArrayList<String>();
             boolean overwrite = true;
             //直接获取generatorConfig.xml的文件路径 根据具体情况查看
-//            File configFile = new File("D:\\yrs\\code\\mybatis-generator-comment\\src\\main\\resources\\mybatis-generator.xml");
-            File configFile = new File("/Users/yangrusheng/yrs/code/study/MyBatis-generator-comment/src/main/resources/mybatis-generator.xml");
+            File configFile = new File("D:\\yrs\\code\\mybatis-generator-comment\\src\\main\\resources\\mybatis-generator.xml");
             ConfigurationParser cp = new ConfigurationParser(warnings);
             Configuration config = cp.parseConfiguration(configFile);
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);

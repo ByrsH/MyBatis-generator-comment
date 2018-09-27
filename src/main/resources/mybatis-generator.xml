@@ -13,7 +13,7 @@
         <commentGenerator type="com.byrsh.mybatisgeneratorcomment.generator.CustomCommentGenerator">
             <!-- This property is used to specify whether MBG will include any coments in the generated code -->
             <!--<property name="suppressAllComments" value="true"/>-->
-            <property name="suppressCustomComments" value="true"/>
+            <property name="suppressCustomComments" value="false"/>
             <property name="suppressDefaultComments" value="true"/>
             <!-- This property is used to specify whether MBG will include the generation timestamp in the generated comments -->
             <property name="suppressDate" value="true"/>

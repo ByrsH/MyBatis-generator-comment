@@ -62,6 +62,7 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     /**
+     * 根据数据库ID删除，逻辑删除
      */
-    int deleteLogicById(@Param("delete") int delete, @Param("id") Long id);
+    int deleteByIdLogic(@Param("delete") int delete, @Param("id") Long id);
 }

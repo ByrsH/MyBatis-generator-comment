@@ -33,6 +33,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
+        <!--注意targetProject路径，当该项目是最外层时路径为src/main/java，当该项目是子模块时路径为  模块名/src/main/java-->
         <javaModelGenerator targetPackage="com.byrsh.mybatisgeneratorcomment.model" targetProject="src/main/java">
             <!-- This property is used to select whether MyBatis Generator will generate different Java packages for
       the objects based on the catalog and schema of the introspected table -->

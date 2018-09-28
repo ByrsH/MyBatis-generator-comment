@@ -247,6 +247,9 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="deleteByIdLogic" >
+    <!--
+    deleteByIdLogic，根据数据库ID删除，逻辑删除
+    -->
     update user set `delete`=#{delete,jdbcType=INTEGER} where id=#{id,jdbcType=BIGINT}
   </update>
 </mapper>

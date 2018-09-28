@@ -2,6 +2,7 @@ package com.byrsh.mybatisgeneratorcomment.generator;
 
 import java.util.List;
 
+import org.mybatis.generator.api.GeneratedXmlFile;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.*;
@@ -36,6 +37,7 @@ public class DeleteByIdLogicPlugin extends PluginAdapter {
         return true;
     }
 
+
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
 
@@ -48,6 +50,9 @@ public class DeleteByIdLogicPlugin extends PluginAdapter {
         XmlElement deleteLogicByIdElement = new XmlElement("update");
         deleteLogicByIdElement.addAttribute(new Attribute("id", "deleteByIdLogic"));
 
+        //添加注释
+        context.getCommentGenerator().addComment(deleteLogicByIdElement);
+
         deleteLogicByIdElement.addElement(
                 new TextElement(
                         "update " + tableName + " set `delete`=#{delete,jdbcType=INTEGER} where "
@@ -55,12 +60,11 @@ public class DeleteByIdLogicPlugin extends PluginAdapter {
                 ));
 
         parentElement.addElement(deleteLogicByIdElement);
-
-        return super.sqlMapDocumentGenerated(document, introspectedTable);
+        return true;
     }
 
     private Method generateDeleteByIdLogic(IntrospectedTable introspectedTable) {
-        Method newMethod = new Method("deleteLogicById");
+        Method newMethod = new Method("deleteByIdLogic");
         newMethod.setVisibility(JavaVisibility.PUBLIC);
         newMethod.setReturnType(FullyQualifiedJavaType.getIntInstance());
         newMethod.addParameter(new Parameter(FullyQualifiedJavaType.getIntInstance(), "delete",
@@ -68,6 +72,7 @@ public class DeleteByIdLogicPlugin extends PluginAdapter {
         newMethod.addParameter(new Parameter(new FullyQualifiedJavaType("Long"), "id",
                 "@Param(\"id\")"));
 
+        //添加注释
         context.getCommentGenerator().addGeneralMethodComment(newMethod,
                 introspectedTable);
         return newMethod;
